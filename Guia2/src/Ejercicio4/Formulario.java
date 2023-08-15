@@ -28,7 +28,7 @@ public static TreeSet<Producto> productlist = new TreeSet<>();
         PrecioBT = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(700, 600));
+        setPreferredSize(new java.awt.Dimension(800, 600));
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -62,6 +62,11 @@ public static TreeSet<Producto> productlist = new TreeSet<>();
 
         RubroBT.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         RubroBT.setText("Por rubro");
+        RubroBT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RubroBTActionPerformed(evt);
+            }
+        });
         jMenu2.add(RubroBT);
 
         NombreBT.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -75,6 +80,11 @@ public static TreeSet<Producto> productlist = new TreeSet<>();
 
         PrecioBT.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         PrecioBT.setText("Por precio");
+        PrecioBT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PrecioBTActionPerformed(evt);
+            }
+        });
         jMenu2.add(PrecioBT);
 
         jMenuBar1.add(jMenu2);
@@ -100,12 +110,39 @@ public static TreeSet<Producto> productlist = new TreeSet<>();
         jDesktopPane1.removeAll();
         jDesktopPane1.repaint();
         BusquedaPorNombre wind = new BusquedaPorNombre();
+        int centerX=(this.getWidth()/2)-(wind.getWidth()/2);
+        int centerY=(this.getHeight()/2)-(wind.getHeight());
+        wind.setBounds(centerX,centerY,500, 300);
         wind.setVisible(true);
         jDesktopPane1.add(wind);
         jDesktopPane1.moveToFront(wind);
         
         
     }//GEN-LAST:event_NombreBTActionPerformed
+
+    private void RubroBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RubroBTActionPerformed
+        jDesktopPane1.removeAll();
+        jDesktopPane1.repaint();
+        BusquedaPorRubro wind = new BusquedaPorRubro();
+        int centerX=(this.getWidth()/2)-(wind.getWidth()/2);
+        int centerY=(this.getHeight()/2)-(wind.getHeight());
+        wind.setBounds(centerX,centerY,500, 300);
+        wind.setVisible(true);
+        jDesktopPane1.add(wind);
+        jDesktopPane1.moveToFront(wind);
+    }//GEN-LAST:event_RubroBTActionPerformed
+
+    private void PrecioBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrecioBTActionPerformed
+        jDesktopPane1.removeAll();
+        jDesktopPane1.repaint();
+        BusquedaPorPrecio wind = new BusquedaPorPrecio();
+        int centerX=(this.getWidth()/2)-(wind.getWidth()/2);
+        int centerY=(this.getHeight()/2)-(wind.getHeight());
+        wind.setBounds(centerX,centerY,wind.getWidth(), wind.getHeight());
+        wind.setVisible(true);
+        jDesktopPane1.add(wind);
+        jDesktopPane1.moveToFront(wind);
+    }//GEN-LAST:event_PrecioBTActionPerformed
 
  
     public static void main(String args[]) {
@@ -155,7 +192,10 @@ public static TreeSet<Producto> productlist = new TreeSet<>();
         productlist.add(new Producto(10,"Azucar x 1kg",180.75,5,Categoria.COMESTIBLE));
         productlist.add(new Producto(12,"Yerba Mate",850,10,Categoria.COMESTIBLE));
         productlist.add(new Producto(5,"Aceite de girasol",250,5,Categoria.COMESTIBLE));
+        productlist.add(new Producto(6,"Lavandina",500,3,Categoria.LIMPIEZA));
 
     }
+    
+    
 
 }

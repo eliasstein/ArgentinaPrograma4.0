@@ -11,18 +11,16 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Chocobo
  */
-public class BusquedaPorNombre extends javax.swing.JInternalFrame {
-private DefaultTableModel model=new DefaultTableModel(){
-  public boolean isCellEditable(int f, int c){
-  return false;
-  }
-};
+public class BusquedaPorRubro extends javax.swing.JInternalFrame {
+private DefaultTableModel table = new DefaultTableModel();
     /**
-     * Creates new form BusquedaPorNombre
+     * Creates new form BusquedaPorRubro
      */
-    public BusquedaPorNombre() {
+    public BusquedaPorRubro() {
         initComponents();
         Header();
+        LoadCombo();
+
     }
 
     /**
@@ -36,25 +34,20 @@ private DefaultTableModel model=new DefaultTableModel(){
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
         setClosable(true);
 
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jLabel1.setText("Busqueda por nombre");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel1.setText("Listado de productos por rubro");
 
-        jLabel2.setText("Escriba los primeros caracteres");
+        jLabel2.setText("Elija rubro:");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextField1KeyReleased(evt);
+                jComboBox1ActionPerformed(evt);
             }
         });
 
@@ -76,79 +69,76 @@ private DefaultTableModel model=new DefaultTableModel(){
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(167, 167, 167)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(138, 138, 138)
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField1)))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(73, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(49, 49, 49))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(8, 8, 8)
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         clearTable();
         for(Producto prod:Formulario.productlist){
-            if (prod.getDescripcion().toLowerCase().startsWith(jTextField1.getText().toLowerCase())){
-                model.addRow(new Object[]{
-                prod.getCodigo(),
-                prod.getDescripcion(),
-                prod.getPrecio(),
-                prod.getStock()
+            if(prod.getRubro().equals(jComboBox1.getSelectedItem()))
+                table.addRow(new Object[]{
+                    prod.getCodigo(),
+                    prod.getDescripcion(),
+                    prod.getPrecio(),
+                    prod.getStock()
                 });
-            }
         }
-        
-    }//GEN-LAST:event_jTextField1KeyReleased
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<Categoria> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 
+    private void LoadCombo(){
+        jComboBox1.addItem(Categoria.COMESTIBLE);
+        jComboBox1.addItem(Categoria.LIMPIEZA);
+        jComboBox1.addItem(Categoria.PERFUMERIA);
+    }
 private void Header(){
-    model.addColumn("Codigo");
-    model.addColumn("Descripcion");
-    model.addColumn("Precio");
-    model.addColumn("Stock");
-    jTable1.setModel(model);
+    table.addColumn("Codigo");
+    table.addColumn("Descripcion");
+    table.addColumn("Precio");
+    table.addColumn("Stock");
+    jTable1.setModel(table);
 }
 private void clearTable(){
     int f = jTable1.getRowCount()-1;
     for(int x=f;x>=0;x--){
-        model.removeRow(x);
+        table.removeRow(x);
     }
 }
-
+    
+    
 }
