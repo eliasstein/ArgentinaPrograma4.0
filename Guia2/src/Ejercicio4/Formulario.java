@@ -48,6 +48,11 @@ public static TreeSet<Producto> productlist = new TreeSet<>();
 
         ProductosBT.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         ProductosBT.setText("Productos");
+        ProductosBT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ProductosBTActionPerformed(evt);
+            }
+        });
         jMenu1.add(ProductosBT);
 
         jMenuBar1.add(jMenu1);
@@ -144,6 +149,18 @@ public static TreeSet<Producto> productlist = new TreeSet<>();
         jDesktopPane1.moveToFront(wind);
     }//GEN-LAST:event_PrecioBTActionPerformed
 
+    private void ProductosBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProductosBTActionPerformed
+        jDesktopPane1.removeAll();
+        jDesktopPane1.repaint();
+        GestionDeProductos wind = new GestionDeProductos();
+        int centerX=(this.getWidth()/2)-(wind.getWidth()/2);
+        int centerY=(this.getHeight()/2)-(wind.getHeight()/2);
+        wind.setBounds(centerX,centerY,wind.getWidth(), wind.getHeight());
+        wind.setVisible(true);
+        jDesktopPane1.add(wind);
+        jDesktopPane1.moveToFront(wind); 
+    }//GEN-LAST:event_ProductosBTActionPerformed
+
  
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -189,10 +206,10 @@ public static TreeSet<Producto> productlist = new TreeSet<>();
     // End of variables declaration//GEN-END:variables
 
     private void cargarProductos(){
-        productlist.add(new Producto(10,"Azucar x 1kg",180.75,5,Categoria.COMESTIBLE));
-        productlist.add(new Producto(12,"Yerba Mate",850,10,Categoria.COMESTIBLE));
-        productlist.add(new Producto(5,"Aceite de girasol",250,5,Categoria.COMESTIBLE));
-        productlist.add(new Producto(6,"Lavandina",500,3,Categoria.LIMPIEZA));
+        productlist.add(new Producto(1,"Azucar x 1kg",180.75,5,Categoria.COMESTIBLE));
+        productlist.add(new Producto(2,"Yerba Mate",850,10,Categoria.COMESTIBLE));
+        productlist.add(new Producto(3,"Aceite de girasol",250,5,Categoria.COMESTIBLE));
+        productlist.add(new Producto(4,"Lavandina",500,3,Categoria.LIMPIEZA));
 
     }
     
