@@ -59,13 +59,34 @@ public class GestionDeProductos extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Codigo:");
 
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+        });
+
         jLabel3.setText("Descripcion:");
 
         jLabel4.setText("Precio:");
 
+        jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField3KeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField3KeyReleased(evt);
+            }
+        });
+
         jLabel5.setText("Rubro:");
 
         jLabel6.setText("Stock:");
+
+        jTextField4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField4KeyReleased(evt);
+            }
+        });
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ejercicio4/Lupa.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -82,6 +103,11 @@ public class GestionDeProductos extends javax.swing.JInternalFrame {
         });
 
         jButton3.setText("Guardar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Eliminar");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -120,10 +146,9 @@ public class GestionDeProductos extends javax.swing.JInternalFrame {
                                     .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton1))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, 158, Short.MAX_VALUE))
+                            .addComponent(jTextField3)
+                            .addComponent(jTextField4)
+                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jTextField2)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton2)
@@ -244,6 +269,77 @@ public class GestionDeProductos extends javax.swing.JInternalFrame {
         }
         
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        try{
+            for (Producto prod:Formulario.productlist){
+                if(Integer.parseInt(jTextField1.getText())==prod.getCodigo()){
+                    prod.setDescripcion(jTextField2.getText());
+                    prod.setPrecio(Double.parseDouble(jTextField3.getText()));
+                    prod.setRubro((Categoria)jComboBox1.getSelectedItem());
+                    prod.setStock(Integer.parseInt(jTextField4.getText()));
+                    JOptionPane.showMessageDialog(this, "Se modificado el articulo N°"+prod.getCodigo());
+                    return;
+                }
+                else{
+                    Formulario.productlist.add(new Producto(Integer.parseInt(jTextField1.getText()),
+                            jTextField2.getText(), Double.parseDouble(jTextField3.getText()),
+                            Integer.parseInt(jTextField4.getText()),(Categoria)jComboBox1.getSelectedItem()));
+                    JOptionPane.showMessageDialog(this, "Se modificado el articulo N°"+prod.getCodigo());
+                    return;
+                }
+            }
+        }
+        catch(java.lang.NumberFormatException ex)
+        {
+            System.out.println(ex.toString());
+            JOptionPane.showMessageDialog(this, "El codigo debe ser de tipo numerico no caracteres");
+            jTextField1.setText("");
+        }
+                    
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTextField3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyPressed
+
+    }//GEN-LAST:event_jTextField3KeyPressed
+
+    private void jTextField3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyReleased
+        try{
+            if(!jTextField3.getText().isEmpty())
+                Double.parseDouble(jTextField3.getText());
+        }
+        catch(java.lang.NumberFormatException ex){
+            JOptionPane.showMessageDialog(this, "ERROR este campo solo acepta numeros con coma");
+            jTextField3.setText(jTextField3.getText().substring(0, jTextField3.getText().length()-1));
+        }
+    }//GEN-LAST:event_jTextField3KeyReleased
+
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+        
+        try{
+            if(!jTextField1.getText().isEmpty())
+                Integer.parseInt(jTextField1.getText());
+        }
+        catch(java.lang.NumberFormatException ex){
+            JOptionPane.showMessageDialog(this, "ERROR este campo solo acepta valores de tipo numerico");
+            jTextField1.setText(jTextField1.getText().substring(0, jTextField1.getText().length()-1));
+        }
+        
+    }//GEN-LAST:event_jTextField1KeyReleased
+
+    private void jTextField4KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField4KeyReleased
+        
+        try{
+            if(!jTextField1.getText().isEmpty())
+                Integer.parseInt(jTextField1.getText());
+        }
+        catch(java.lang.NumberFormatException ex){
+            JOptionPane.showMessageDialog(this, "ERROR este campo solo acepta valores de tipo numerico");
+            jTextField1.setText(jTextField1.getText().substring(0, jTextField1.getText().length()-1));
+        }
+        
+    }//GEN-LAST:event_jTextField4KeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
